@@ -2,7 +2,7 @@
 
 🔥 Passionate about crafting **scalable web applications** with **Python, JavaScript, and modern frameworks**.  
 
-![Zeph Banner](./assets/logo.png)
+![Zeph Banner](/assets/logo.png)
 ---
 
 ## 🚀 About Me  
