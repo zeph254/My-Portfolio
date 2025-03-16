@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Experience from './pages/Experience'
+
 import Contact from './pages/Contact'
 import Skills from './pages/Skills'
 import Layout from './components/Layout'
@@ -16,6 +17,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        
         <Route path="projects" element={<Projects/>}/>
         <Route path="experience" element={<Experience />} />
         <Route path="contact"element={<Contact/>}/>
