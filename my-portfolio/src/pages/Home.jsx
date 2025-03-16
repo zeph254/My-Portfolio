@@ -1,5 +1,5 @@
-import React from "react";
-import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaTools, FaProjectDiagram, FaPython, } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaTools, FaProjectDiagram, FaPython } from "react-icons/fa";
 import { motion } from "framer-motion";
 import profile from "../assets/profile.jpeg";
 import unishop from "../assets/unishop.png";
@@ -8,27 +8,78 @@ import chama from "../assets/chama.jpeg";
 import { Link } from "react-router-dom";
 import { SiFlask, SiDjango, SiFastapi, SiAngular } from "react-icons/si";
 
+// SkillToggle Component
+const SkillToggle = () => {
+  const [activeCategory, setActiveCategory] = useState("Frontend");
+
+  return (
+    <div className="mt-6">
+      {/* Toggle Buttons */}
+      <div className="flex space-x-4 mb-4">
+        {Object.keys(skills).map((category) => (
+          <motion.button
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+              activeCategory === category
+                ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white"
+            }`}
+          >
+            <div className="flex items-center space-x-2">
+              {/* Add Icons for Each Category */}
+              {category === "Frontend" && <FaCode className="w-5 h-5" />}
+              {category === "Backend" && <FaTools className="w-5 h-5" />}
+              {category === "DevOps" && <FaProjectDiagram className="w-5 h-5" />}
+              <span>{category}</span>
+            </div>
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Display Skills */}
+      <motion.div
+        key={activeCategory}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="text-xl font-medium text-white"
+      >
+        {skills[activeCategory].join(" • ")}
+      </motion.div>
+    </div>
+  );
+};
+
+// Skills Data
+const skills = {
+  Frontend: ["React", "Tailwind", "Framer Motion"],
+  Backend: ["Flask", "Django", "PostgreSQL"],
+  DevOps: ["Docker", "CI/CD", "Netlify"],
+};
+
 export default function Home() {
   return (
     <div className="bg-gray-900 text-white font-poppins">
       {/* Hero Section */}
-      <section className="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900">
+      <section className="min-h-[120vh] flex flex-col justify-center items-center text-center bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900">
         {/* Personal Picture */}
         <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative mb-8"
-            >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-700 opacity-50 blur-xl rounded-full"></div>
-            <img
-                src={profile}
-                alt="Your Name"
-                className="w-48 h-60 rounded-full border-[6px] border-white shadow-2xl backdrop-blur-md bg-opacity-30 hover:shadow-blue-400 transition-all duration-300"
-            />
-            </motion.div>
-
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative mb-8"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-700 opacity-50 blur-xl rounded-full"></div>
+          <img
+            src={profile}
+            alt="Your Name"
+            className="w-48 h-60 rounded-full border-[6px] border-white shadow-2xl backdrop-blur-md bg-opacity-30 hover:shadow-blue-400 transition-all duration-300"
+          />
+        </motion.div>
 
         {/* Name and Tagline */}
         <motion.h1
@@ -39,21 +90,45 @@ export default function Home() {
         >
           Zeph.dev
         </motion.h1>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-2xl mb-8"
+          className="text-center mb-8"
         >
-          Building the future, one line of code at a time.
-        </motion.p>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-white text-blue-900 px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 hover:text-white transition-all duration-300"
-        >
-          View My Work
-        </motion.button>
+          {/* Smaller Text */}
+          <p className="text-sm text-gray-300 mb-4">
+            Building the future, one line of code at a time.
+            <br />
+            Want to build a simple web app real quick? Use the toggles below.
+          </p>
+
+          {/* Animated Arrow */}
+          <motion.div
+            initial={{ y: 0 }}
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="text-gray-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 mx-auto"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </motion.div>
+        </motion.div>
+
+        {/* SkillToggle Component */}
+        <SkillToggle />
       </section>
 
       {/* Skills Section */}
@@ -71,7 +146,6 @@ export default function Home() {
               { name: "Angular", icon: <SiAngular className="w-12 h-12 mb-4" /> },
               { name: "Node.js", icon: <FaProjectDiagram className="w-12 h-12 mb-4" /> },
               { name: "UI/UX Design", icon: <FaCode className="w-12 h-12 mb-4" /> },
-
             ].map((skill, index) => (
               <motion.div
                 key={index}
@@ -94,7 +168,7 @@ export default function Home() {
             {[
               {
                 title: "unishop",
-                description: "An e-commerce platform with a focus on user experience..",
+                description: "An e-commerce platform with a focus on user experience.",
                 image: unishop,
                 link: "https://run-sigma.vercel.app/",
               },
