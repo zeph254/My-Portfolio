@@ -71,3 +71,6 @@ A **real-time** platform for creating and managing notes with multiple users.
 ---
 
 🚀 **_"The best way to predict the future is to create it."_** 🚀  
+
+## 🚀 Live link
+(https://zephdevcwp.netlify.app/)
